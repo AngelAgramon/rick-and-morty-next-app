@@ -8,7 +8,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import { AppProvider } from "./context/AppContext";
-import "./globals.css";
+import stylesheet from "./globals.css?url";
 
 export const meta: MetaFunction = () => [
   { title: "Rick and Morty App" },
@@ -16,6 +16,7 @@ export const meta: MetaFunction = () => [
 ];
 
 export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
   { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" },
