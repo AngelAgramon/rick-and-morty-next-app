@@ -2,7 +2,7 @@
 'use client'; // This directive indicates that this module should be treated as a Client Component
 
 import React from 'react';
-import { CharacterGridProps } from '../types';
+import { CharacterGridProps } from '../../types/types';
 import CharacterCard from './CharacterCard';
 
 const CharacterGrid: React.FC<CharacterGridProps> = ({ characters }) => {
