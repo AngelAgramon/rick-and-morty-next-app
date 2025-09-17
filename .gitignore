@@ -13,12 +13,12 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
+# remix
+/build/
+/public/build/
 
 # production
-/build
+/dist/
 
 # misc
 .DS_Store
@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# remix cache and temp files
+.cache/
+.remix/
+*.log
+
+# editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+Thumbs.db
