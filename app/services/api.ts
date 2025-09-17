@@ -9,13 +9,13 @@ interface LoginResponse {
 }
 
 export const simulateLogin = async (username: string, password: string): Promise<LoginResponse> => {
-	// This function now calls our Next.js API route for login
+	// This function now calls our Remix API route for login
 	const response = await axios.post<LoginResponse>('/api/login', { username, password });
 	return response.data;
 };
 
 export const fetchRickAndMortyCharactersAPI = async (): Promise<Character[]> => {
-	// This function now calls our Next.js API route for characters
+	// This function now calls our Remix API route for characters
 	const response = await axios.get<CharacterApiResponse>('/api/characters');
 	return response.data.results;
 };

@@ -1,7 +1,5 @@
 // app/context/AppContext.tsx
-'use client'; // This directive indicates that this module should be treated as a Client Component
-
-import { useRouter } from 'next/navigation'; // Use next/navigation for App Router
+import { useNavigate } from '@remix-run/react';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { fetchRickAndMortyCharactersAPI, simulateLogin } from '../services/api'; // Updated imports
 import { AppContextType, Character } from '../types';
@@ -21,7 +19,7 @@ interface AppProviderProps {
 }
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	// Authentication State
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -46,7 +44,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 					setIsAuthenticated(true);
 					setAuthToken(response.token);
 					setAuthLoading(false);
-					router.push('/characters'); // Redirect on successful login
+					navigate('/characters'); // Redirect on successful login
 					return true;
 				} else {
 					setAuthError(response.message || 'Login failed');
@@ -67,7 +65,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 				return false;
 			}
 		},
-		[router]
+		[navigate]
 	);
 
 	// Logout Function
@@ -79,8 +77,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 		setCharacters([]); // Clear characters on logout
 		setCharactersError(null);
 		setCharactersLoading(false);
-		router.push('/(auth)'); // Redirect to login page after logout
-	}, [router]);
+		navigate('/auth'); // Redirect to login page after logout
+	}, [navigate]);
 
 	// Fetch Characters Function
 	const fetchCharacters = useCallback(async () => {
