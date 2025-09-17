@@ -2,7 +2,7 @@
 import { useNavigate } from '@remix-run/react';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { fetchRickAndMortyCharactersAPI, simulateLogin } from '../services/api'; // Updated imports
-import { AppContextType, Character } from '../types';
+import { AppContextType, Character } from '../types/types';
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 

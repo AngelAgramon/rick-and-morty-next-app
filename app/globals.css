@@ -1,6 +1,11 @@
 /* src/app/globals.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
 
+@font-face {
+  font-family: 'Get Schwifty';
+  src: url('../assets/fonts/get_schwifty.ttf') format('truetype');
+}
+
 :root {
 	--bg-dark: #1f2937; /* Gray 800 equivalent */
 	--bg-darker: #111827; /* Gray 900 equivalent */
@@ -52,6 +57,10 @@ button {
 button:focus {
 	outline: none;
 	box-shadow: 0 0 0 4px var(--ring-blue-500); /* focus:ring-2 focus:ring-blue-500 */
+}
+
+.rickFont {
+  font-family: 'Get Schwifty', sans-serif;
 }
 
 /* Utility for text gradients (manual implementation) */
@@ -188,23 +197,10 @@ button:focus {
 
 /* Character grid */
 .character-grid {
-	display: grid;
-	grid-template-columns: repeat(1, minmax(0, 1fr));
-	gap: 1.5rem; /* gap-6 */
-}
-
-@media (min-width: 640px) {
-	/* sm breakpoint */
-	.character-grid {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-}
-
-@media (min-width: 1024px) {
-	/* lg breakpoint */
-	.character-grid {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
+	grid-template-columns: repeat(auto-fit, minmax(243px, 1fr));
+    gap: 1.5rem;
+    display: grid;
+    width: 90%;
 }
 
 .page-heading {
@@ -237,7 +233,7 @@ button:focus {
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	max-width: 960px; /* max-w-4xl */
-	padding: 0 1rem; /* px-4 */
+	/* max-width: 960px; max-w-4xl */
+	/* padding: 0 1rem; px-4 */
 	min-height: calc(100vh - 4rem); /* To account for root padding */
 }
