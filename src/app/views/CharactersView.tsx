@@ -19,7 +19,7 @@ const CharactersView: React.FC = () => {
 		if (typeof window !== 'undefined') {
 			const token = localStorage.getItem('authToken');
 			if (!isAuthenticated && !token) {
-				router.push('/(auth)'); // Redirect to login if not authenticated
+				router.push('/'); // Redirect to login if not authenticated
 			} else if (!isAuthenticated && token) {
 				// If token exists but Redux state not updated (e.g., page refresh), set isAuthenticated
 				// This scenario is now handled by the AppProvider's initial useEffect if it was the old Redux.
@@ -37,7 +37,7 @@ const CharactersView: React.FC = () => {
 
 	const handleLogout = () => {
 		logout();
-		router.push('/(auth)'); // Redirect to login page after logout
+		router.push('/'); // Redirect to login page after logout
 	};
 
 	if (!isAuthenticated) {
