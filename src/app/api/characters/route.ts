@@ -1,7 +1,7 @@
 // app/api/characters/route.ts
 import axios from 'axios';
 import { NextResponse } from 'next/server';
-import { CharacterApiResponse } from '../../types'; // Adjust path as needed
+import { CharacterApiResponse } from '../../../types/types'; // Adjust path as needed
 
 export async function GET() {
 	try {

@@ -4,7 +4,7 @@
 import { Inter } from 'next/font/google';
 import Head from 'next/head'; // Using Head for title and meta tags
 import React from 'react';
-import { AppProvider } from './context/AppContext';
+import { AppProvider } from '../context/AppContext';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
