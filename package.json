@@ -1,16 +1,21 @@
 {
-  "name": "rick-and-morty-next-app",
+  "name": "rick-and-morty-remix-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start",
+    "dev": "remix dev",
+    "build": "remix build",
+    "start": "remix-serve build",
+    "typecheck": "tsc",
     "lint": "eslint"
   },
   "dependencies": {
+    "@remix-run/dev": "^2.17.0",
+    "@remix-run/node": "^2.17.0",
+    "@remix-run/react": "^2.17.0",
+    "@remix-run/serve": "^2.17.0",
     "axios": "^1.11.0",
-    "next": "15.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
@@ -21,7 +26,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.5.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
