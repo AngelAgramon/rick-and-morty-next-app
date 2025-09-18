@@ -1,5 +1,5 @@
+import { AuthApi } from '~/services';
 import { AuthModel } from '../models/AuthModel';
-import { simulateLogin } from '../services/api';
 
 export class AuthController {
   constructor(private authModel: AuthModel) {}
@@ -9,7 +9,8 @@ export class AuthController {
     this.authModel.setError(null);
     
     try {
-      const response = await simulateLogin(username, password);
+      const api = new AuthApi();
+      const response = await api.simulateLogin(username, password);
       if (response.success && response.token) {
         localStorage.setItem('authToken', response.token);
         this.authModel.setAuthenticated(true, response.token);

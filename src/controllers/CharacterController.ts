@@ -1,5 +1,5 @@
+import { CharacterApi } from '~/services';
 import { CharacterModel } from '../models/CharacterModel';
-import { fetchRickAndMortyCharactersAPI } from '../services/api';
 
 export class CharacterController {
   constructor(private characterModel: CharacterModel) {}
@@ -9,7 +9,8 @@ export class CharacterController {
     this.characterModel.setError(null);
     
     try {
-      const fetchedCharacters = await fetchRickAndMortyCharactersAPI();
+      const api = new CharacterApi();
+      const fetchedCharacters = await api.fetchRickAndMortyCharactersAPI();
       this.characterModel.setCharacters(fetchedCharacters);
       this.characterModel.setLoading(false);
     } catch (error) {

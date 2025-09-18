@@ -1,9 +1,11 @@
 /* src/app/globals.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
 
+
+
 @font-face {
   font-family: 'Get Schwifty';
-  src: url('../assets/fonts/get_schwifty.ttf') format('truetype');
+  src: url('../src/assets/fonts/get_schwifty.ttf') format('truetype');
 }
 
 :root {

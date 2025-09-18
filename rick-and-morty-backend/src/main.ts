@@ -11,7 +11,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  const port = process.env.PORT || 3001;
+  const port = process.env.PORT || 3002;
   await app.listen(port);
   console.log(`Backend ejecutándose en http://localhost:${port}`);
   console.log(`Documentación disponible en http://localhost:${port}/api`);

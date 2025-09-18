@@ -1,8 +1,8 @@
 // app/context/AppContext.tsx
 import { useNavigate } from '@remix-run/react';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { fetchRickAndMortyCharactersAPI, simulateLogin } from '../services/api'; // Updated imports
-import { AppContextType, Character } from '../types/types';
+import { AppContextType, Character } from '../types';
+import { AuthApi, CharacterApi } from '~/services';
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -38,13 +38,14 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 			setAuthLoading(true);
 			setAuthError(null);
 			try {
-				const response = await simulateLogin(username, password); // Call backend login API
+				const api = new AuthApi();
+				const response = await api.simulateLogin(username, password); // Call backend login API
 				if (response.success && response.token) {
 					localStorage.setItem('authToken', response.token);
 					setIsAuthenticated(true);
 					setAuthToken(response.token);
 					setAuthLoading(false);
-					navigate('/characters'); // Redirect on successful login
+					navigate('/characters');
 					return true;
 				} else {
 					setAuthError(response.message || 'Login failed');
@@ -69,7 +70,12 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 	);
 
 	// Logout Function
-	const logout = useCallback(() => {
+	const logout = useCallback(async () => {
+		try {
+			const api = new AuthApi();
+			await api.simulateLogout(); 
+		} catch (error) {
+		}
 		localStorage.removeItem('authToken');
 		setIsAuthenticated(false);
 		setAuthToken(null);
@@ -85,7 +91,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 		setCharactersLoading(true);
 		setCharactersError(null);
 		try {
-			const fetchedCharacters = await fetchRickAndMortyCharactersAPI(); // Call backend characters API
+			const api = new CharacterApi();
+			const fetchedCharacters = await api.fetchRickAndMortyCharactersAPI(); // Call backend characters API
 			setCharacters(fetchedCharacters);
 			setCharactersLoading(false);
 		} catch (error: unknown) {
