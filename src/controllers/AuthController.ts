@@ -18,10 +18,9 @@ class AuthController {
   } 
 
   get getIsLoggedIn() {
+    console.log(this.userName)
     return this.userName !== null;
   }
-
-
 
   initialize(){
     this.userName = null
@@ -65,6 +64,7 @@ class AuthController {
       return false;
     }
   }
+
   logout() {
     localStorage.removeItem('authToken');
     this.initializeAuth();

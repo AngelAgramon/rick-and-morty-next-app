@@ -5,39 +5,37 @@ import { useRouter } from 'next/navigation'; // Use next/navigation for App Rout
 import React, { useEffect } from 'react';
 import CharacterGrid from '../components/CharacterGrid';
 import Layout from '../components/Layout';
-import { useAppContext } from '../../context/AppContext';
-
 import loadingGif from '../../assets/loading.gif';
+import { authController, characterController } from '../../controllers';
 
 const CharactersView: React.FC = () => {
-	const { auth, characters, charactersLoading, charactersError, fetchCharacters } = useAppContext();
-	const { isAuthenticated, logout } = auth;
 	const router = useRouter();
+	const {getIsLoggedIn, logout} = authController;
+	const isAuthenticated = getIsLoggedIn;	
+	const { fetchCharacters, getcharacters, getIsLoading, getIsError } = characterController;
+	const characters = getcharacters
 
 	useEffect(() => {
+		console.log(isAuthenticated)
 		// Client-side authentication check
 		if (typeof window !== 'undefined') {
 			const token = localStorage.getItem('authToken');
 			if (!isAuthenticated && !token) {
-				router.push('/'); // Redirect to login if not authenticated
+				router.push('/'); 
 			} else if (!isAuthenticated && token) {
-				// If token exists but Redux state not updated (e.g., page refresh), set isAuthenticated
-				// This scenario is now handled by the AppProvider's initial useEffect if it was the old Redux.
-				// With current Context, this check already happened in AppProvider.
-				// If isAuthenticated is false despite a token, it means login wasn't successful or cleared.
 			}
 		}
 	}, [isAuthenticated, router]);
 
 	useEffect(() => {
-		if (isAuthenticated && characters.length === 0 && !charactersLoading && !charactersError) {
+		if (isAuthenticated && characters.length === 0 && !getIsLoading && !getIsError) {
 			fetchCharacters();
 		}
-	}, [isAuthenticated, characters.length, fetchCharacters, charactersLoading, charactersError]);
+	}, [isAuthenticated, characters.length, fetchCharacters, getIsLoading, getIsError]);
 
 	const handleLogout = () => {
 		logout();
-		router.push('/'); // Redirect to login page after logout
+		router.push('/'); 
 	};
 
 	if (!isAuthenticated) {
@@ -59,13 +57,13 @@ const CharactersView: React.FC = () => {
 				</button>
 			</div>
 
-			{charactersLoading && 
+			{getIsLoading && 
             <>
                  <p className='loading-message rickFont'>Loading characters...</p>
 				<img src={loadingGif.src} />
             </> }
-			{charactersError && <p className='error-message'>Error: {charactersError}</p>}
-			{!charactersLoading && !charactersError && <CharacterGrid characters={characters} />}
+			{getIsError && <p className='error-message'>Error: {getIsError}</p>}
+			{!getIsLoading && !getIsError && <CharacterGrid characters={characters} />}
 		</Layout>
 	);
 };
