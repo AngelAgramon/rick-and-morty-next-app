@@ -1,15 +1,15 @@
 // app/characters/page.tsx
 'use client'; // This directive indicates that this module should be treated as a Client Component
-
-import { useRouter } from 'next/navigation'; // Use next/navigation for App Router
+import { useNavigate } from "@remix-run/react";
 import React, { useEffect } from 'react';
-import CharacterGrid from '../components/CharacterGrid';
-import Layout from '../components/Layout';
-import loadingGif from '../../assets/loading.gif';
+import CharacterGrid from '../../../app/components/CharacterGrid';
+import Layout from '../../../app/components/Layout';
+// import loadingGif from '../../../public/loading.gif';
 import { authController, characterController } from '../../controllers';
+import { observer } from "mobx-react-lite"
 
-const CharactersView: React.FC = () => {
-	const router = useRouter();
+const CharactersView: React.FC = observer (() => {
+	const navigate = useNavigate();
 	const {getIsLoggedIn, logout} = authController;
 	const isAuthenticated = getIsLoggedIn;	
 	const { fetchCharacters, getcharacters, getIsLoading, getIsError } = characterController;
@@ -21,11 +21,11 @@ const CharactersView: React.FC = () => {
 		if (typeof window !== 'undefined') {
 			const token = localStorage.getItem('authToken');
 			if (!isAuthenticated && !token) {
-				router.push('/'); 
+				navigate('/'); 
 			} else if (!isAuthenticated && token) {
 			}
 		}
-	}, [isAuthenticated, router]);
+	}, [isAuthenticated]);
 
 	useEffect(() => {
 		if (isAuthenticated && characters.length === 0 && !getIsLoading && !getIsError) {
@@ -35,7 +35,7 @@ const CharactersView: React.FC = () => {
 
 	const handleLogout = () => {
 		logout();
-		router.push('/'); 
+		navigate('/'); 
 	};
 
 	if (!isAuthenticated) {
@@ -60,12 +60,12 @@ const CharactersView: React.FC = () => {
 			{getIsLoading && 
             <>
                  <p className='loading-message rickFont'>Loading characters...</p>
-				<img src={loadingGif.src} />
+				{/* <img src={loadingGif.src} /> */}
             </> }
 			{getIsError && <p className='error-message'>Error: {getIsError}</p>}
 			{!getIsLoading && !getIsError && <CharacterGrid characters={characters} />}
 		</Layout>
 	);
-};
+});
 
 export default CharactersView;

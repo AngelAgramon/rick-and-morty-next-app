@@ -7,8 +7,6 @@ export class AuthApi extends Api {
     }
     
     public simulateLogin = async (username: string, password: string): Promise<LoginResponseDto> => {
-        // const response = await this.api.post<LoginResponseDto>(`/auth/login`, { username, password });
-        // return response.data;
         const response = await this.post<LoginResponseDto>(`/auth/login`, { username, password });
         return response.data;
     };

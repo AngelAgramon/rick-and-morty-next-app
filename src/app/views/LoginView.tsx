@@ -1,39 +1,35 @@
 // app/(auth)/page.tsx
 'use client'; // This directive indicates that this module should be treated as a Client Component
-
-import { useRouter } from 'next/navigion'; // Use next/navigation for App Router
+import { useNavigate } from "@remix-run/react";
 import React, { useEffect, useState } from 'react';
-import Layout from '../components/Layout';
-import { useAppContext } from '../context/AppContext';
+import Layout from '../../../app/components/Layout';
 import { authController } from '../../controllers';
+import { observer } from 'mobx-react-lite'; 
 
-
-const LoginView: React.FC = () => {
-	const router = useRouter();
+const LoginView: React.FC = observer (() => {
+	const navigate = useNavigate();
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const {getIsLoggedIn, login} = authController;
 	const isAuthenticated = getIsLoggedIn;	
 
-
-
 	useEffect(() => {
 		if (isAuthenticated) {
-			router.push('/characters'); // Redirect on successful authentication
+			navigate('/characters'); 
 		}
-	}, [isAuthenticated, router]);
-
-	const { loading, error } = useAppContext().auth;
+	}, [isAuthenticated]);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+    	debugger
+
 		login(username, password).then((success) => {
 			if (success) {
-				router.push('/characters'); // Redirect on successful login
+				navigate('/characters'); 
 			}
-		}
-		);
+		});
 	};
+
 	return (
 		<Layout>
 			<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 4rem)' }}>
@@ -73,16 +69,15 @@ const LoginView: React.FC = () => {
 								required
 							/>
 						</div>
-						<button type='submit' className='btn-primary' disabled={loading}>
-							{loading ? 'Logging in...' : 'Login'}
+						<button type='submit' className='btn-primary'>
+							Login
 						</button>
-						{error && <p className='error-message'>{error}</p>}
 						<p className='info-message'>Try: username `user` | password `password`</p>
 					</form>
 				</div>
 			</div>
 		</Layout>
 	);
-};
+});
 
 export default LoginView;
