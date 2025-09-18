@@ -10,7 +10,7 @@ const LoginView: React.FC = observer (() => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
-	const {getIsLoggedIn, login} = authController;
+	const {isLoggedIn: getIsLoggedIn, login} = authController;
 	const isAuthenticated = getIsLoggedIn;	
 
 	useEffect(() => {
@@ -21,8 +21,6 @@ const LoginView: React.FC = observer (() => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-    	debugger
-
 		login(username, password).then((success) => {
 			if (success) {
 				navigate('/characters'); 

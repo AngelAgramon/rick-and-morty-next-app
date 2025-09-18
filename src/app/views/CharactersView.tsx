@@ -10,7 +10,7 @@ import { observer } from "mobx-react-lite"
 
 const CharactersView: React.FC = observer (() => {
 	const navigate = useNavigate();
-	const {getIsLoggedIn, logout} = authController;
+	const {isLoggedIn: getIsLoggedIn, logout} = authController;
 	const isAuthenticated = getIsLoggedIn;	
 	const { fetchCharacters, getcharacters, getIsLoading, getIsError } = characterController;
 	const characters = getcharacters
