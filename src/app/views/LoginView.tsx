@@ -1,17 +1,21 @@
 // app/(auth)/page.tsx
 'use client'; // This directive indicates that this module should be treated as a Client Component
 
-import { useRouter } from 'next/navigation'; // Use next/navigation for App Router
+import { useRouter } from 'next/navigion'; // Use next/navigation for App Router
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import { useAppContext } from '../../context/AppContext';
+import { useAppContext } from '../context/AppContext';
+import { authController } from '../../controllers';
+
 
 const LoginView: React.FC = () => {
+	const router = useRouter();
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
-	const { auth } = useAppContext();
-	const { loading, error, isAuthenticated, login } = auth;
-	const router = useRouter();
+	const {getIsLoggedIn, login} = authController;
+	const isAuthenticated = getIsLoggedIn;	
+
+
 
 	useEffect(() => {
 		if (isAuthenticated) {
@@ -19,11 +23,17 @@ const LoginView: React.FC = () => {
 		}
 	}, [isAuthenticated, router]);
 
+	const { loading, error } = useAppContext().auth;
+
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		await login(username, password);
+		login(username, password).then((success) => {
+			if (success) {
+				router.push('/characters'); // Redirect on successful login
+			}
+		}
+		);
 	};
-
 	return (
 		<Layout>
 			<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 4rem)' }}>
