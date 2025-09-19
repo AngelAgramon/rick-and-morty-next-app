@@ -5,6 +5,7 @@ import { Character } from "~/types";
 class CharacterController {
   _characters: Character[] = [];
   _isError: boolean = false;
+  _isLoading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -26,15 +27,35 @@ class CharacterController {
     return this._isError;
   }
 
+  get getcharacters () {
+    return this._characters;
+  }
+
+  get getIsLoading () {
+    return this._isLoading;
+  }
+
+  get getIsError () {
+    return this._isError;
+  }
+
+  set isLoading (isLoading: boolean) {
+    this._isLoading = isLoading;
+  }
+
   fetchCharacters = async () => {
       try {
+        this.isLoading = true;
+        this.isError = false;
         
         const api = new CharacterApi();
         const fetchedCharacters = await api.fetchRickAndMortyCharactersAPI();
         this.characters = fetchedCharacters;
+        this.isLoading = false;
      
       } catch (error) {
         this.isError = true;
+        this.isLoading = false;
       }
   };
 }

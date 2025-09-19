@@ -28,10 +28,10 @@ const CharactersView: React.FC = observer (() => {
 	}, [isAuthenticated]);
 
 	useEffect(() => {
-		if (isAuthenticated && characters.length === 0 && !getIsLoading && !getIsError) {
+		if (isAuthenticated && characters && characters.length === 0 && !getIsLoading && !getIsError) {
 			fetchCharacters();
 		}
-	}, [isAuthenticated, characters.length, fetchCharacters, getIsLoading, getIsError]);
+	}, [isAuthenticated, characters, fetchCharacters, getIsLoading, getIsError]);
 
 	const handleLogout = () => {
 		logout();

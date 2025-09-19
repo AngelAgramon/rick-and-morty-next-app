@@ -1,7 +1,5 @@
-/* src/app/globals.css */
+/* Estilos globales para la aplicación Rick and Morty */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
-
-
 
 @font-face {
   font-family: 'Get Schwifty';
@@ -44,10 +42,7 @@ body {
 	color: var(--text-white);
 }
 
-/* Ensure #root is not added by Next.js App Router */
-/* These styles will apply globally. */
-
-/* General button styles */
+/* ===== ESTILOS DE BOTONES ===== */
 button {
 	cursor: pointer;
 	border-radius: 0.5rem; /* rounded-lg */
@@ -65,7 +60,7 @@ button:focus {
   font-family: 'Get Schwifty', sans-serif;
 }
 
-/* Utility for text gradients (manual implementation) */
+/* ===== UTILIDADES DE TEXTO ===== */
 .text-gradient {
 	background-clip: text;
 	-webkit-background-clip: text;
@@ -80,7 +75,7 @@ button:focus {
 	background-image: linear-gradient(to right, var(--from-teal-400), var(--to-cyan-500));
 }
 
-/* Specific button styles (manual implementation) */
+/* ===== ESTILOS ESPECÍFICOS DE BOTONES ===== */
 .btn-primary {
 	background-image: linear-gradient(to right, var(--from-blue-600), var(--to-purple-600));
 	color: var(--text-white);
@@ -104,7 +99,7 @@ button:focus {
 	transform: scale(1.05);
 }
 
-/* Card and input styles */
+/* ===== ESTILOS DE TARJETAS Y CAMPOS ===== */
 .card {
 	background-color: var(--bg-dark);
 	padding: 2rem; /* p-8 */
@@ -149,7 +144,7 @@ button:focus {
 	margin-top: 1rem; /* mt-4 */
 }
 
-/* Specific card for characters */
+/* ===== TARJETAS DE PERSONAJES ===== */
 .character-card {
 	background-color: var(--bg-dark);
 	border-radius: 0.5rem; /* rounded-lg */
@@ -197,7 +192,7 @@ button:focus {
 	font-weight: 600; /* font-semibold */
 }
 
-/* Character grid */
+/* ===== LAYOUT Y GRID ===== */
 .character-grid {
 	grid-template-columns: repeat(auto-fit, minmax(243px, 1fr));
     gap: 1.5rem;
@@ -229,7 +224,7 @@ button:focus {
 	padding: 2.5rem 0; /* py-10 */
 }
 
-/* Remix layout */
+/* ===== LAYOUT DE REMIX ===== */
 .remix-layout-container {
 	display: flex;
 	flex-direction: column;
@@ -240,7 +235,7 @@ button:focus {
 	min-height: calc(100vh - 4rem);
 }
 
-/* Inter font */
+/* Clase para la fuente Inter */
 .font-inter {
 	font-family: 'Inter', sans-serif;
 }

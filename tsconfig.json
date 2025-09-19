@@ -17,6 +17,6 @@
 			"~/*": ["./app/*"]
 		}
 	},
-	"include": ["**/*.ts", "**/*.tsx", "app/types.d.ts"],
+	"include": ["**/*.ts", "**/*.tsx", "app/types.d.ts", "app/css.d.ts"],
 	"exclude": ["node_modules"]
 }
