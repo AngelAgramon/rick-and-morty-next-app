@@ -1,5 +1,5 @@
 import React from 'react';
-import { CharacterGridProps } from '../../types';
+import { CharacterGridProps } from '../types';
 import CharacterCard from './CharacterCard';
 
 const CharacterGrid: React.FC<CharacterGridProps> = ({ characters }) => {

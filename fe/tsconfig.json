@@ -14,11 +14,9 @@
         "jsx": "react-jsx",
         "incremental": true,
         "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
         "paths": {
-            "~/*": ["./app/*"],
-            "~/components/*": ["./app/src/components/*"],
-            "~/services/*": ["./app/src/services/*"],
-            "~/types": ["./app/types"]
+            "~/*": ["./app/*"]
         }
     },
     "include": [

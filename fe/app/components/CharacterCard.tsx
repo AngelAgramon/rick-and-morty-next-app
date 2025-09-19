@@ -1,5 +1,5 @@
 import React from 'react';
-import { CharacterCardProps } from '../../types';
+import { CharacterCardProps } from '../types';
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
 	const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {

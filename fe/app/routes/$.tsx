@@ -1,21 +1,17 @@
-import { useRouteError } from "@remix-run/react";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 
-export default function ErrorBoundary() {
-  const error = useRouteError();
-  console.error(error);
+export async function loader({ request }: LoaderFunctionArgs) {
+  const url = new URL(request.url);
+  
+  // Handle Chrome DevTools requests silently
+  if (url.pathname.startsWith('/.well-known/')) {
+    return new Response(null, { status: 404 });
+  }
+  
+  // Redirect other 404s to home
+  throw new Response(null, { status: 404 });
+}
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">¡Ups!</h1>
-        <p className="text-gray-600 mb-8">Algo salió mal.</p>
-        <button 
-          onClick={() => window.location.href = '/'}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Volver al inicio
-        </button>
-      </div>
-    </div>
-  );
+export default function CatchAll() {
+  return null;
 }

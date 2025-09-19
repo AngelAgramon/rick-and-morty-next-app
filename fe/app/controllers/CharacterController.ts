@@ -1,6 +1,6 @@
 import { CharacterApi } from "../services";
 import { makeAutoObservable } from 'mobx';
-import { Character } from "../../types";
+import { Character } from "../types";
 
 class CharacterController {
   _characters: Character[] = [];

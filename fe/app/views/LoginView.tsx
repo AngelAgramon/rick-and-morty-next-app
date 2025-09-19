@@ -1,7 +1,7 @@
 import { useNavigate } from "@remix-run/react";
 import React, { useEffect, useState } from 'react';
-import Layout from '../../components/Layout';
-import { authController } from '../../controllers';
+import Layout from '../components/Layout';
+import { authController } from '../controllers';
 import { observer } from 'mobx-react-lite'; 
 
 const LoginView: React.FC = observer (() => {

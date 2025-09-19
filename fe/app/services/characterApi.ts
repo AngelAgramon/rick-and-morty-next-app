@@ -1,4 +1,4 @@
-import { CharacterApiResponse, Character } from "../../types";
+import { CharacterApiResponse, Character } from "../types";
 import { Api } from "./api";
 
 export class CharacterApi extends Api {

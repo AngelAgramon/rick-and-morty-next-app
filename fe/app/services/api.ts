@@ -1,6 +1,6 @@
 // app/services/api.ts
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Character, CharacterApiResponse } from '../../types';
+import { Character, CharacterApiResponse } from '../types';
 
 interface LoginResponse {
 	success: boolean;

@@ -1,4 +1,4 @@
-import CharactersView from "../src/app/views/CharactersView";
+import CharactersView from "../views/CharactersView";
 
 export default function CharactersPage() {
   return <CharactersView />;

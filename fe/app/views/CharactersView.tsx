@@ -1,11 +1,11 @@
 import { useNavigate } from "@remix-run/react";
 import React, { useEffect } from 'react';
 
-import { authController, characterController } from '../../controllers';
+import { authController, characterController } from '../controllers';
 import { observer } from "mobx-react-lite"
-import CharacterGrid from '../../components/CharacterGrid';
-import Layout from '../../components/Layout';
-import Loading from '../../components/Loading';
+import CharacterGrid from '../components/CharacterGrid';
+import Layout from '../components/Layout';
+import Loading from '../components/Loading';
 
 const CharactersView: React.FC = observer (() => {
 	const navigate = useNavigate();

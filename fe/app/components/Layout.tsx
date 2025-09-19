@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutProps } from '../../types';
+import { LayoutProps } from '../types';
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
 	return (
