@@ -14,8 +14,6 @@
         "jsx": "react-jsx",
         "incremental": true,
         "forceConsistentCasingInFileNames": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
         "paths": {
             "~/*": ["./app/*"],
             "~/components/*": ["./app/src/components/*"],
@@ -29,7 +27,6 @@
     ],
     "exclude": [
         "node_modules",
-        "rick-and-morty-backend",
         "build",
         "public/build",
         ".cache"

@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "remix dev",
-    "build": "tsc --project tsconfig.app.json --noEmit && remix build",
+    "build": "remix build",
     "start": "remix-serve build",
-    "typecheck": "tsc --project tsconfig.app.json",
+    "typecheck": "tsc",
     "lint": "eslint"
   },
   "dependencies": {

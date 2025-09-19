@@ -29,7 +29,7 @@ const LoginView: React.FC = observer (() => {
 	return (
 		<Layout>
 			<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 4rem)' }}>
-				<h1 className='main-page-heading text-gradient green-blue'>Welcome to the Rick and Morty App. This is a test application for a job.</h1>
+				<h1 className='main-page-heading text-gradient green-blue'>Welcome to the Rick and Morty App.</h1>
 				<div className='card' style={{ maxWidth: '448px', width: '100%' }}>
 					<h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '1.5rem', color: 'var(--text-white)' }}>Login</h2>
 					<form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
