@@ -15,11 +15,11 @@ const CharactersView: React.FC = observer (() => {
 	const characters = getcharacters
 
 	useEffect(() => {
-		console.log(isAuthenticated)
 		// Client-side authentication check
 		if (typeof window !== 'undefined') {
 			const token = localStorage.getItem('authToken');
 			if (!isAuthenticated && !token) {
+				console.log("ok")
 				navigate('/'); 
 			} else if (!isAuthenticated && token) {
 			}
@@ -32,9 +32,9 @@ const CharactersView: React.FC = observer (() => {
 		}
 	}, [isAuthenticated, characters.length, fetchCharacters, getIsError, getIsLoading]);
 
-	const handleLogout = () => {
-		logout();
+	const handleLogout = async () => {
 		navigate('/'); 
+		await logout();
 	};
 
 	if (!isAuthenticated) {

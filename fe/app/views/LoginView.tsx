@@ -12,10 +12,11 @@ const LoginView: React.FC = observer (() => {
 	const isAuthenticated = getIsLoggedIn;	
 
 	useEffect(() => {
-		if (isAuthenticated) {
+	  const token = localStorage.getItem('authToken');
+		if (token ) {
 			navigate('/characters'); 
-		}
-	}, [isAuthenticated]);
+		} 
+	}, []);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
