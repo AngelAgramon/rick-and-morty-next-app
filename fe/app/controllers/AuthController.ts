@@ -1,7 +1,5 @@
 import { AuthApi } from '../services';
-import { AuthModel } from '../models/AuthModel';
-import { action, makeAutoObservable, makeObservable } from 'mobx';
-import { observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { useNavigate } from '@remix-run/react';
 
 class AuthController {

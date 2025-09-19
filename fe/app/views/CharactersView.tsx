@@ -8,7 +8,6 @@ import Layout from '../components/Layout';
 import Loading from '../components/Loading';
 
 const CharactersView: React.FC = observer (() => {
-	const {logout} = authController;
 	const { 
 		characters, 
 		isError: getIsError, 
