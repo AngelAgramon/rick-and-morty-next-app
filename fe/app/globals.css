@@ -121,6 +121,7 @@ button:focus {
 	border: 1px solid var(--border-gray-600);
 	color: var(--text-white);
 	transition: all 0.2s;
+	box-sizing: border-box;
 }
 
 .input-field::placeholder {
