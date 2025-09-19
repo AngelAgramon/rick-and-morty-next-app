@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "target": "ES2017",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "noEmit": false,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "react-jsx",
+        "incremental": true,
+        "forceConsistentCasingInFileNames": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "paths": {
+            "~/*": ["./app/*"]
+        }
+    },
+    "include": [
+        "app/**/*.ts",
+        "app/**/*.tsx"
+    ],
+    "exclude": [
+        "node_modules",
+        "rick-and-morty-backend",
+        "build",
+        "public/build",
+        ".cache"
+    ]
+}
