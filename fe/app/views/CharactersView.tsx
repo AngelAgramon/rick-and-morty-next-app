@@ -11,30 +11,20 @@ const CharactersView: React.FC = observer (() => {
 	const navigate = useNavigate();
 	const {isLoggedIn: getIsLoggedIn, logout} = authController;
 	const isAuthenticated = getIsLoggedIn;	
-	const { fetchCharacters, characters: getcharacters, isError: getIsError, isLoading: getIsLoading } = characterController;
-	const characters = getcharacters
+	const { 
+		characters, 
+		isError: getIsError, 
+		isLoading: getIsLoading
+	} = characterController;
 
 	useEffect(() => {
-		// Client-side authentication check
-		if (typeof window !== 'undefined') {
-			const token = localStorage.getItem('authToken');
-			if (!isAuthenticated && !token) {
-				console.log("ok")
-				navigate('/'); 
-			} else if (!isAuthenticated && token) {
-			}
-		}
-	}, [isAuthenticated]);
+		authController.checkAuthAndNavigate(navigate);
+		characterController.checkAuthAndLoadData(isAuthenticated);
+	}, [isAuthenticated, navigate]);
 
-	useEffect(() => {
-		if (isAuthenticated && characters.length === 0 && !getIsError && !getIsLoading) {
-			fetchCharacters();
-		}
-	}, [isAuthenticated, characters.length, fetchCharacters, getIsError, getIsLoading]);
-
-	const handleLogout = async () => {
-		navigate('/'); 
-		await logout();
+	const handleLogout = () => {
+		authController.logout();
+		navigate('/');
 	};
 
 	if (!isAuthenticated) {

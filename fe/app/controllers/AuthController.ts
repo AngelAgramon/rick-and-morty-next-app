@@ -1,5 +1,5 @@
 import { AuthApi } from '../services';
-import { AuthModel } from '../src/models/AuthModel';
+import { AuthModel } from '../models/AuthModel';
 import { action, makeAutoObservable, makeObservable } from 'mobx';
 import { observable } from 'mobx';
 
@@ -45,8 +45,18 @@ class AuthController {
     }
   };
 
+  checkAuthAndNavigate = (navigate: (path: string) => void) => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('authToken');
+      if (!this.isLoggedIn && !token) {
+        navigate('/'); 
+      }
+    }
+  };
+
   logout = () => {
     localStorage.removeItem('authToken');
+    this.userName = null;
   }
 }
 const authController = new AuthController();

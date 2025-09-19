@@ -50,6 +50,12 @@ class CharacterController {
         this.isLoading = false;
       }
   };
+
+  checkAuthAndLoadData = (isAuthenticated: boolean) => {
+    if (isAuthenticated && this.characters.length === 0 && !this.isError && !this.isLoading) {
+      this.fetchCharacters();
+    }
+  };
 }
 
 const characterController = new CharacterController();
