@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: 'Get Schwifty';
-  src: url('../src/assets/fonts/get_schwifty.ttf') format('truetype');
+  src: url('./src/assets/fonts/get_schwifty.ttf') format('truetype');
 }
 
 :root {
@@ -238,4 +238,43 @@ button:focus {
 	/* max-width: 960px; max-w-4xl */
 	/* padding: 0 1rem; px-4 */
 	min-height: calc(100vh - 4rem); /* To account for root padding */
+}
+
+/* Loading Component Styles */
+.loading-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 200px;
+	width: 100%;
+}
+
+.loading-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+.loading-gif {
+	object-fit: contain;
+	animation: pulse 2s ease-in-out infinite;
+}
+
+.loading-message {
+	color: #00d4aa;
+	font-size: 1.2rem;
+	margin: 0;
+	text-align: center;
+}
+
+@keyframes pulse {
+	0%, 100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.7;
+		transform: scale(1.05);
+	}
 }

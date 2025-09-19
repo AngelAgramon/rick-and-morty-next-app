@@ -1,8 +1,5 @@
-// app/components/CharacterCard.tsx
-'use client'; // This directive indicates that this module should be treated as a Client Component
-
 import React from 'react';
-import { CharacterCardProps } from '../types';
+import { CharacterCardProps } from '../../types';
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
 	const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {

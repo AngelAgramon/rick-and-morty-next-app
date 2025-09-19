@@ -1,4 +1,11 @@
-import { Controller, Get, Param, ParseIntPipe, Query, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { CharactersService } from './characters.service';
 import type {
   CharacterApiResponse,
@@ -18,7 +25,7 @@ export class CharactersController {
   ): Promise<CharacterApiResponse> {
     return await this.charactersService.getCharacters(queryParams);
   }
-  
+
   @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   async getCharacterById(

@@ -1,17 +1,18 @@
-import { CharacterApi } from "~/services";
+import { CharacterApi } from "../services";
 import { makeAutoObservable } from 'mobx';
-import { Character } from "~/types";
+import { Character } from "../../types";
 
 class CharacterController {
   _characters: Character[] = [];
   _isError: boolean = false;
+  _isLoading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
   }
 
   get characters () {
-    return this._characters = [];
+    return this._characters;
   }
 
   set characters (characters: Character[]) {
@@ -26,8 +27,18 @@ class CharacterController {
     return this._isError;
   }
 
+  get isLoading () {
+    return this._isLoading;
+  }
+
+  set isLoading (isLoading: boolean) {
+    this._isLoading = isLoading;
+  }
+
   fetchCharacters = async () => {
       try {
+        this.isLoading = true;
+        this.isError = false;
         
         const api = new CharacterApi();
         const fetchedCharacters = await api.fetchRickAndMortyCharactersAPI();
@@ -35,6 +46,8 @@ class CharacterController {
      
       } catch (error) {
         this.isError = true;
+      } finally {
+        this.isLoading = false;
       }
   };
 }

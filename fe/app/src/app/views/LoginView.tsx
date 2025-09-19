@@ -1,8 +1,6 @@
-// app/(auth)/page.tsx
-'use client'; // This directive indicates that this module should be treated as a Client Component
 import { useNavigate } from "@remix-run/react";
 import React, { useEffect, useState } from 'react';
-import Layout from '../../../app/components/Layout';
+import Layout from '../../components/Layout';
 import { authController } from '../../controllers';
 import { observer } from 'mobx-react-lite'; 
 

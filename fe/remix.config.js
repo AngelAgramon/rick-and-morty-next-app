@@ -5,6 +5,8 @@ export default {
     v2_meta: true,
     v2_routeConvention: true,
   },
-  watchPaths: ["./app", "./src"],  // Esto asegura que Remix observe cambios en la carpeta 'app
+  watchPaths: ["./app"],  // Remix observa cambios en la carpeta 'app'
+  serverModuleFormat: "esm",
+  serverDependenciesToBundle: ["mobx", "mobx-react-lite"],
 };
 

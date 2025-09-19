@@ -1,8 +1,5 @@
-// app/components/Layout.tsx
-'use client'; // This directive indicates that this module should be treated as a Client Component
-
 import React from 'react';
-import { LayoutProps } from '../types';
+import { LayoutProps } from '../../types';
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
 	return (

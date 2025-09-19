@@ -1,5 +1,4 @@
-import { CharacterApiResponse } from "~/types";
-import { Character } from "../../rick-and-morty-backend/src/types";
+import { CharacterApiResponse, Character } from "../../types";
 import { Api } from "./api";
 
 export class CharacterApi extends Api {

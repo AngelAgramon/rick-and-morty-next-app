@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { LoginDto, LoginResponseDto, User } from './dto/login.dto';
 
 @Injectable()
-export class AuthService implements IAuthService{
+export class AuthService implements IAuthService {
   private readonly users: User[] = [
     { username: 'user', password: 'password' },
     { username: 'admin', password: 'admin123' },
@@ -10,7 +10,8 @@ export class AuthService implements IAuthService{
 
   async validateUser(loginDto: LoginDto): Promise<LoginResponseDto> {
     const user = this.users.find(
-      u => u.username === loginDto.username && u.password === loginDto.password
+      (u) =>
+        u.username === loginDto.username && u.password === loginDto.password,
     );
 
     if (user) {
@@ -18,19 +19,18 @@ export class AuthService implements IAuthService{
         success: true,
         message: 'Login successful',
         token: 'fake-jwt-token-123',
-        username: user.username
+        username: user.username,
       };
     }
 
     return {
       success: false,
-      message: 'Invalid username or password'
+      message: 'Invalid username or password',
     };
   }
 }
 
 export interface IAuthService {
-  //solo lo publico 
+  //solo lo publico
   validateUser(loginDto: LoginDto): Promise<LoginResponseDto>;
 }
-

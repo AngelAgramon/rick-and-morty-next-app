@@ -1,18 +1,17 @@
-// app/characters/page.tsx
-'use client'; // This directive indicates that this module should be treated as a Client Component
 import { useNavigate } from "@remix-run/react";
 import React, { useEffect } from 'react';
-import CharacterGrid from '../../../app/components/CharacterGrid';
-import Layout from '../../../app/components/Layout';
-// import loadingGif from '../../../public/loading.gif';
+
 import { authController, characterController } from '../../controllers';
 import { observer } from "mobx-react-lite"
+import CharacterGrid from '../../components/CharacterGrid';
+import Layout from '../../components/Layout';
+import Loading from '../../components/Loading';
 
 const CharactersView: React.FC = observer (() => {
 	const navigate = useNavigate();
 	const {isLoggedIn: getIsLoggedIn, logout} = authController;
 	const isAuthenticated = getIsLoggedIn;	
-	const { fetchCharacters, characters: getcharacters, isError: getIsError } = characterController;
+	const { fetchCharacters, characters: getcharacters, isError: getIsError, isLoading: getIsLoading } = characterController;
 	const characters = getcharacters
 
 	useEffect(() => {
@@ -28,10 +27,10 @@ const CharactersView: React.FC = observer (() => {
 	}, [isAuthenticated]);
 
 	useEffect(() => {
-		if (isAuthenticated && characters.length === 0 && !getIsError) {
+		if (isAuthenticated && characters.length === 0 && !getIsError && !getIsLoading) {
 			fetchCharacters();
 		}
-	}, [isAuthenticated, characters.length, fetchCharacters, getIsError]);
+	}, [isAuthenticated, characters.length, fetchCharacters, getIsError, getIsLoading]);
 
 	const handleLogout = () => {
 		logout();
@@ -57,13 +56,9 @@ const CharactersView: React.FC = observer (() => {
 				</button>
 			</div>
 
-			{/* {getIsLoading && 
-            <>
-                 <p className='loading-message rickFont'>Loading characters...</p>
-				
-            </> } */}
+			{getIsLoading && <Loading message="Cargando personajes..." size="large" />}
 			{getIsError && <p className='error-message'>Error: {getIsError}</p>}
-			{!getIsError && <CharacterGrid characters={characters} />}
+			{!getIsError && !getIsLoading && <CharacterGrid characters={characters} />}
 		</Layout>
 	);
 });

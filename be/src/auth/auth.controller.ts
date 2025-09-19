@@ -6,26 +6,22 @@ import * as jwt from 'jsonwebtoken';
 
 @Controller('auth')
 export class AuthController {
-   constructor(
+  constructor(
     @Inject('IAuthService')
-    private readonly authService: IAuthService
+    private readonly authService: IAuthService,
   ) {}
-
 
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
     const user = await this.authService.validateUser(loginDto);
     if (user) {
-      const token = jwt.sign(
-        { username: user.username }, 
-        'your_jwt_secret', 
-        { expiresIn: '1h' }
-      );
+      const token = jwt.sign({ username: user.username }, 'your_jwt_secret', {
+        expiresIn: '1h',
+      });
       return { success: true, token, user };
     }
     return { success: false, message: 'Credenciales inválidas' };
   }
-
 
   @UseGuards(AuthGuard('jwt'))
   @Post('logout')
