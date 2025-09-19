@@ -1,13 +1,6 @@
 // app/services/api.ts
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Character, CharacterApiResponse } from '../types';
-
-interface LoginResponse {
-	success: boolean;
-	message?: string;
-	token?: string;
-}
-
+import { authController } from '../controllers/AuthController';
 
 export class Api {
 	private readonly API_BASE_URL: string = 'http://localhost:3002'; 
@@ -27,7 +20,8 @@ export class Api {
     };
 
 	private getRequestToken () {
-		return localStorage.getItem('authToken')
+		const token = authController.token;
+		return token;
 	}
 
 	protected getConfiguration = () : AxiosRequestConfig => {

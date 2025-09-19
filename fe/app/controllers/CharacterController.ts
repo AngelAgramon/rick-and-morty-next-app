@@ -51,8 +51,8 @@ class CharacterController {
       }
   };
 
-  checkAuthAndLoadData = (isAuthenticated: boolean) => {
-    if (isAuthenticated && this.characters.length === 0 && !this.isError && !this.isLoading) {
+  initialize = () => {
+    if (this.characters.length === 0 && !this.isError && !this.isLoading) {
       this.fetchCharacters();
     }
   };

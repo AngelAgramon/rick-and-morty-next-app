@@ -8,34 +8,16 @@ import Layout from '../components/Layout';
 import Loading from '../components/Loading';
 
 const CharactersView: React.FC = observer (() => {
-	const navigate = useNavigate();
-	const {isLoggedIn: getIsLoggedIn, logout} = authController;
-	const isAuthenticated = getIsLoggedIn;	
+	const {logout} = authController;
 	const { 
 		characters, 
 		isError: getIsError, 
 		isLoading: getIsLoading
 	} = characterController;
 
-	useEffect(() => {
-		authController.checkAuthAndNavigate(navigate);
-		characterController.checkAuthAndLoadData(isAuthenticated);
-	}, [isAuthenticated, navigate]);
-
 	const handleLogout = () => {
 		authController.logout();
-		navigate('/');
 	};
-
-	if (!isAuthenticated) {
-		return (
-			<Layout>
-				<div className='redirect-message'>
-					<p>Redirecting to login...</p>
-				</div>
-			</Layout>
-		);
-	}
 
 	return (
 		<Layout>

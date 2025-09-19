@@ -2,10 +2,11 @@ import { AuthApi } from '../services';
 import { AuthModel } from '../models/AuthModel';
 import { action, makeAutoObservable, makeObservable } from 'mobx';
 import { observable } from 'mobx';
+import { useNavigate } from '@remix-run/react';
 
 class AuthController {
   _userName: string | null = null;
-  _isAuthenticated = false;
+  _token: string | null = null;
 
   constructor() {
     makeAutoObservable(this)
@@ -15,17 +16,25 @@ class AuthController {
     return this._userName;
   } 
 
-  get isLoggedIn() {
-    return this._userName !== null;
-  }
-
   set userName (userName: string  | null) {
     this._userName = userName;
   }
 
-  initialize = () => {
-    this._userName = null
-    this._isAuthenticated = false
+  get isAuthenticated() {
+    // const token = localStorage.getItem('authToken');
+    const result = this._userName !== null && this._token !== null;
+
+    if (!result) {
+      // localStorage.removeItem('authToken');
+      this._userName = null;
+      this._token = null;
+    } 
+
+    return result;
+  }
+
+  get token() {
+    return this._token;
   }
 
   login = async (username: string, password: string): Promise<boolean> => {
@@ -33,8 +42,9 @@ class AuthController {
       const api = new AuthApi();
       const response = await api.simulateLogin(username, password);
       if (response.success && response.token) {
-        localStorage.setItem('authToken', response.token);
+        // localStorage.setItem('authToken', response.token);
         this.userName = username;
+        this._token = response.token;
         return true;
       } else {
         return false;
@@ -45,18 +55,20 @@ class AuthController {
     }
   };
 
-  checkAuthAndNavigate = (navigate: (path: string) => void) => {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('authToken');
-      if (!this.isLoggedIn && !token) {
-        navigate('/'); 
-      }
+  validateRoute = () => {
+    const navigate = useNavigate();
+    const { isAuthenticated } = this;
+
+    if (!isAuthenticated) {
+      navigate('/');
     }
-  };
+  }
 
   logout = () => {
-    localStorage.removeItem('authToken');
+    const navigate = useNavigate();
+    this._token = null;
     this.userName = null;
+    navigate('/');
   }
 }
 const authController = new AuthController();

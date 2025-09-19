@@ -8,15 +8,7 @@ const LoginView: React.FC = observer (() => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
-	const {isLoggedIn: getIsLoggedIn, login} = authController;
-	const isAuthenticated = getIsLoggedIn;	
-
-	useEffect(() => {
-	  const token = localStorage.getItem('authToken');
-		if (token ) {
-			navigate('/characters'); 
-		} 
-	}, []);
+	const {login} = authController;
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
