@@ -24,12 +24,9 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() loginDto: UserDto) {
-    const user = await this.authService.createUser(loginDto);
-    if (user) {
-      return { success: true, user };
-    }
-    return { success: false, message: 'Credenciales inválidas' };
+  async register(@Body() registerDto: UserDto) {
+    const user = await this.authService.createUser(registerDto);
+    return user;
   }
 
 

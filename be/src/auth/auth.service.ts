@@ -4,8 +4,7 @@ import { UserDto, AuthResponseDto, User } from './dto/auth.dto';
 @Injectable()
 export class AuthService implements IAuthService {
   private readonly users: User[] = [
-    { username: 'user', password: 'password' },
-    { username: 'admin', password: 'admin123' },
+    { username: 'user', password: 'password' }
   ];
 
   async validateUser(loginDto: UserDto): Promise<AuthResponseDto> {
