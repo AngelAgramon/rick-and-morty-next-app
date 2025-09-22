@@ -6,14 +6,17 @@ import { observer } from "mobx-react-lite"
 import CharacterGrid from '../components/CharacterGrid';
 import Layout from '../components/Layout';
 import Loading from '../components/Loading';
+import { characterModel } from "~/models";
 
 const CharactersView: React.FC = observer (() => {
 	const { 
-		characters, 
-		isError: getIsError, 
-		isLoading: getIsLoading
+		_characters: characters 
 	} = characterController;
-
+	const {
+		_isLoading: getIsLoading,
+		_isError: getIsError
+	} = characterModel
+ 
 	const handleLogout = () => {
 		authController.logout();
 	};

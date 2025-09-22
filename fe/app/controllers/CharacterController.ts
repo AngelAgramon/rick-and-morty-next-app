@@ -1,58 +1,34 @@
 import { CharacterApi } from "../services";
 import { makeAutoObservable } from 'mobx';
 import { Character } from "../types";
+import { characterModel } from "../models";
 
 class CharacterController {
   _characters: Character[] = [];
-  _isError: boolean = false;
-  _isLoading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  get characters () {
-    return this._characters;
-  }
-
-  set characters (characters: Character[]) {
-    this._characters = characters;
-  }
-
-  set isError (isError: boolean) {
-    this._isError = isError;
-  }
-
-  get isError () {
-    return this._isError;
-  }
-
-  get isLoading () {
-    return this._isLoading;
-  }
-
-  set isLoading (isLoading: boolean) {
-    this._isLoading = isLoading;
-  }
-
   fetchCharacters = async () => {
       try {
-        this.isLoading = true;
-        this.isError = false;
+        characterModel.isLoading = true;
+        characterModel.isError = false;
         
         const api = new CharacterApi();
         const fetchedCharacters = await api.fetchRickAndMortyCharactersAPI();
-        this.characters = fetchedCharacters;
+        this._characters = fetchedCharacters;
+        console.log(fetchedCharacters);
      
       } catch (error) {
-        this.isError = true;
+        characterModel.isError = true;
       } finally {
-        this.isLoading = false;
+        characterModel.isLoading = false;
       }
   };
 
   initialize = () => {
-    if (this.characters.length === 0 && !this.isError && !this.isLoading) {
+    if (this._characters.length === 0 && !characterModel.isError && !characterModel.isLoading) {
       this.fetchCharacters();
     }
   };
