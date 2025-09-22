@@ -13,8 +13,9 @@ const CharactersView: React.FC = observer (() => {
 		_characters: characters 
 	} = characterController;
 	const {
-		_isLoading: getIsLoading,
-		_isError: getIsError
+		isLoading: getIsLoading,
+		isError: getIsError,
+		errorMessage: getErrorMessage
 	} = characterModel
  
 	const handleLogout = () => {
@@ -31,7 +32,7 @@ const CharactersView: React.FC = observer (() => {
 			</div>
 
 			{getIsLoading && <Loading message="Cargando personajes..." size="large" />}
-			{getIsError && <p className='error-message'>Error: {getIsError}</p>}
+			{getIsError && <p className='error-message'>Error: {getErrorMessage}</p>}
 			{!getIsError && !getIsLoading && <CharacterGrid characters={characters} />}
 		</Layout>
 	);

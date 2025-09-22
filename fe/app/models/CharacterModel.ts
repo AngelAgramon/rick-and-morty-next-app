@@ -5,6 +5,8 @@ class CharacterModel {
     _characters: Character[] = [];
     _isError: boolean = false;
     _isLoading: boolean = false;
+    _errorMessage: any = '';
+
     constructor() {
         makeAutoObservable(this);
       }   
@@ -16,13 +18,13 @@ class CharacterModel {
       set characters (characters: Character[]) {
         this._characters = characters;
       }
+
+      get isError () {
+        return this._isError;
+      }
     
       set isError (isError: boolean) {
         this._isError = isError;
-      }
-    
-      get isError () {
-        return this._isError;
       }
     
       get isLoading () {
@@ -32,9 +34,15 @@ class CharacterModel {
       set isLoading (isLoading: boolean) {
         this._isLoading = isLoading;
       }
-  
+
+      get errorMessage () {
+        return this._errorMessage;
+      }
+
+      set errorMessage (errorMessage: string) {
+        this._errorMessage = errorMessage;
+      }
 }
+
 const characterModel = new CharacterModel();
 export { characterModel };
-
-

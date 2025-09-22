@@ -18,11 +18,19 @@ class CharacterController {
         const api = new CharacterApi();
         const fetchedCharacters = await api.fetchRickAndMortyCharactersAPI();
         this._characters = fetchedCharacters;
-        console.log(fetchedCharacters);
      
       } catch (error) {
+        //TODO: Search for a clean way to handle errors
+        const errorMessage: any = error instanceof Error ? error.message : 'An unknown error occurred';
+
+        // Message with more details
+        const errorObject: any = error instanceof Error ? error : 'An unknown error occurred';
+        console.log(`${errorObject.message} ${errorObject.code}`);
+
         characterModel.isError = true;
+        characterModel.errorMessage = errorMessage;
       } finally {
+        console.log("finally");
         characterModel.isLoading = false;
       }
   };
