@@ -4,26 +4,19 @@ import Layout from '../components/Layout';
 import { authController } from '../controllers';
 import { observer } from 'mobx-react-lite'; 
 
-const LoginView: React.FC = observer (() => {
+const RegisterView: React.FC = observer (() => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const {login} = authController;
 
-	const handleSubmit = async (e: React.MouseEvent<HTMLSpanElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log("handleSubmit");
 		login(username, password).then((success) => {
 			if (success) {
-				navigate('/characters'); 
+				navigate('/');
 			}
 		});
-	};
-
-	const handleRegisterClick = async (e: React.MouseEvent<HTMLSpanElement>) => {
-		e.preventDefault();
-		console.log("handleRegisterClick");
-		navigate('/register');
 	};
 
 	return (
@@ -31,8 +24,8 @@ const LoginView: React.FC = observer (() => {
 			<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 4rem)' }}>
 				<h1 className='main-page-heading text-gradient green-blue'>Welcome to the Rick and Morty App.</h1>
 				<div className='card' style={{ maxWidth: '448px', width: '100%' }}>
-					<h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '1.5rem', color: 'var(--text-white)' }}>Login</h2>
-					<form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+					<h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '1.5rem', color: 'var(--text-white)' }}>Register form</h2>
+					<form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 						<div>
 							<label
 								htmlFor='username'
@@ -65,20 +58,9 @@ const LoginView: React.FC = observer (() => {
 								required
 							/>
 						</div>
-						<button type='submit' className='btn-primary'
-							onClick={handleSubmit}
-						>
-							Login
+						<button type='submit' className='btn-primary'>
+							Register
 						</button>
-						<p className='info-message'>Try: username `user` | password `password`</p>
-						<p style={{ textAlign: 'center', marginTop: '1rem' }}>
-							Not a member? <span 
-								style={{ color: 'var(--primary-color)', cursor: 'pointer', textDecoration: 'underline' }}
-								onClick={handleRegisterClick}
-							>
-								Signup now
-							</span>
-						</p>
 					</form>
 				</div>
 			</div>
@@ -86,4 +68,4 @@ const LoginView: React.FC = observer (() => {
 	);
 });
 
-export default LoginView;
+export default RegisterView;
