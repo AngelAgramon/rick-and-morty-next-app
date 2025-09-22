@@ -5,9 +5,17 @@ import { characterModel } from "../models";
 
 class CharacterController {
   _characters: Character[] = [];
+  private _characterApi: CharacterApi | null = null;
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  private getCharacterApi(): CharacterApi {
+    if (!this._characterApi) {
+      this._characterApi = new CharacterApi();
+    }
+    return this._characterApi;
   }
 
   fetchCharacters = async () => {
@@ -15,7 +23,7 @@ class CharacterController {
         characterModel.isLoading = true;
         characterModel.isError = false;
         
-        const api = new CharacterApi();
+        const api = this.getCharacterApi();
         const fetchedCharacters = await api.fetchRickAndMortyCharactersAPI();
         this._characters = fetchedCharacters;
      
@@ -39,6 +47,11 @@ class CharacterController {
     if (this._characters.length === 0 && !characterModel.isError && !characterModel.isLoading) {
       this.fetchCharacters();
     }
+  };
+
+  cleanup = (): void => {
+    this._characters = [];
+    this._characterApi = null;
   };
 }
 

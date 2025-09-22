@@ -1,10 +1,10 @@
 import { AuthApi } from '../services';
 import { makeAutoObservable } from 'mobx';
-import { useNavigate } from '@remix-run/react';
 
 class AuthController {
   _userName: string | null = null;
   _token: string | null = null;
+  private _authApi: AuthApi | null = null;
 
   constructor() {
     makeAutoObservable(this)
@@ -19,11 +19,10 @@ class AuthController {
   }
 
   get isAuthenticated() {
-    // const token = localStorage.getItem('authToken');
+    console.log("isAuthenticated", this._userName, this._token);
     const result = this._userName !== null && this._token !== null;
 
     if (!result) {
-      // localStorage.removeItem('authToken');
       this._userName = null;
       this._token = null;
     } 
@@ -35,9 +34,16 @@ class AuthController {
     return this._token;
   }
 
+  private getAuthApi(): AuthApi {
+    if (!this._authApi) {
+      this._authApi = new AuthApi();
+    }
+    return this._authApi;
+  }
+
   login = async (username: string, password: string): Promise<boolean> => {
     try {
-      const api = new AuthApi();
+      const api = this.getAuthApi();
       const response = await api.simulateLogin(username, password);
       if (response.success && response.token) {
         this.userName = username;
@@ -52,20 +58,22 @@ class AuthController {
     }
   };
 
-  validateRoute = () => {
-    const navigate = useNavigate();
-    const { isAuthenticated } = this;
+  validateRoute = (): boolean => {
+    return this.isAuthenticated;
+  }
 
-    if (!isAuthenticated) {
-      navigate('/');
+  logout = (): void => {
+    this._token = null;
+    this.userName = null;
+    if (this._authApi) {
+      this._authApi = null;
     }
   }
 
-  logout = () => {
-    const navigate = useNavigate();
+  cleanup = (): void => {
     this._token = null;
     this.userName = null;
-    navigate('/');
+    this._authApi = null;
   }
 }
 const authController = new AuthController();

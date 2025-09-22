@@ -9,6 +9,7 @@ import Loading from '../components/Loading';
 import { characterModel } from "~/models";
 
 const CharactersView: React.FC = observer (() => {
+	const navigate = useNavigate();
 	const { 
 		_characters: characters 
 	} = characterController;
@@ -20,6 +21,8 @@ const CharactersView: React.FC = observer (() => {
  
 	const handleLogout = () => {
 		authController.logout();
+		characterController.cleanup();
+		navigate("/");
 	};
 
 	return (

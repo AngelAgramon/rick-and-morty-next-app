@@ -38,7 +38,7 @@ export class Api {
 		}
 		const config: AxiosRequestConfig = {
 			withCredentials: true,
-			timeout: 0,
+			timeout: 30000,
 			baseURL: this.API_BASE_URL,
 			maxBodyLength: 1048576,
 			maxContentLength: 1048576,
@@ -48,4 +48,9 @@ export class Api {
 		return config;
 	};
 
+	public cleanup = (): void => {
+		if (this.api && this.api.defaults) {
+			this.api = axios.create(this.getConfiguration());
+		}
+	};
 }
