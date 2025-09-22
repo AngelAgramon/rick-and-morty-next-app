@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { LoginDto, LoginResponseDto, User } from './dto/login.dto';
+import { UserDto, AuthResponseDto, User } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -8,7 +8,7 @@ export class AuthService implements IAuthService {
     { username: 'admin', password: 'admin123' },
   ];
 
-  async validateUser(loginDto: LoginDto): Promise<LoginResponseDto> {
+  async validateUser(loginDto: UserDto): Promise<AuthResponseDto> {
     const user = this.users.find(
       (u) =>
         u.username === loginDto.username && u.password === loginDto.password,
@@ -28,9 +28,26 @@ export class AuthService implements IAuthService {
       message: 'Invalid username or password',
     };
   }
+
+  async createUser(newUserDto: UserDto): Promise<AuthResponseDto> {
+    const exists = this.users.some(u => u.username === newUserDto.username);
+    if (exists) {
+      return {
+        success: false,
+        message: 'Username already exists',
+      };
+    }
+    this.users.push(newUserDto);
+    return {
+      success: true,
+      message: 'User created successfully',
+      username: newUserDto.username,
+    };
+  }
 }
 
 export interface IAuthService {
   //solo lo publico
-  validateUser(loginDto: LoginDto): Promise<LoginResponseDto>;
+  validateUser(loginDto: UserDto): Promise<AuthResponseDto>;
+  createUser(newUserDto: UserDto): Promise<AuthResponseDto>;
 }

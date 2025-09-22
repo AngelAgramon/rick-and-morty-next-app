@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Inject, UseGuards } from '@nestjs/common';
 import type { IAuthService } from './auth.service';
-import type { LoginDto } from './dto/login.dto';
+import type { UserDto } from './dto/auth.dto';
 import { AuthGuard } from '@nestjs/passport';
 import * as jwt from 'jsonwebtoken';
 
@@ -12,7 +12,7 @@ export class AuthController {
   ) {}
 
   @Post('login')
-  async login(@Body() loginDto: LoginDto) {
+  async login(@Body() loginDto: UserDto) {
     const user = await this.authService.validateUser(loginDto);
     if (user) {
       const token = jwt.sign({ username: user.username }, 'your_jwt_secret', {
@@ -22,6 +22,16 @@ export class AuthController {
     }
     return { success: false, message: 'Credenciales inválidas' };
   }
+
+  @Post('register')
+  async register(@Body() loginDto: UserDto) {
+    const user = await this.authService.createUser(loginDto);
+    if (user) {
+      return { success: true, user };
+    }
+    return { success: false, message: 'Credenciales inválidas' };
+  }
+
 
   @UseGuards(AuthGuard('jwt'))
   @Post('logout')

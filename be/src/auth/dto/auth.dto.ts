@@ -1,16 +1,15 @@
 import { IsString } from 'class-validator';
 import { MinLength } from 'class-validator';
 
-export class LoginDto {
+export class UserDto {
   @IsString()
   username: string = '';
-
   @IsString()
   @MinLength(4)
   password: string = '';
 }
 
-export class LoginResponseDto {
+export class AuthResponseDto {
   success: boolean = false;
   message?: string;
   token?: string;
@@ -21,3 +20,4 @@ export class User {
   username: string = '';
   password: string = '';
 }
+
