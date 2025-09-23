@@ -38,6 +38,8 @@ export class AuthService implements IAuthService {
       };
     }
     this.users.push(newUserDto);
+    console.log('User added:', newUserDto);
+    console.log('Updated users list:', this.users); // Imprime el arreglo actualizado
     return {
       success: true,
       message: 'User created successfully',

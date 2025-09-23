@@ -30,6 +30,11 @@ interface CharacterApiResponse {
   results: Character[];
 }
 
+interface User {
+  username: string;
+  password: string;
+}
+
 interface AuthContextType {
   isAuthenticated: boolean;
   token: string | null;
@@ -67,4 +72,5 @@ export type {
   LayoutProps,
   CharacterCardProps,
   CharacterGridProps,
+  User
 };

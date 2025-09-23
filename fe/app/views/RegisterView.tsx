@@ -1,18 +1,18 @@
 import { useNavigate } from "@remix-run/react";
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import { authController } from '../controllers';
+import { registerController } from '../controllers';
 import { observer } from 'mobx-react-lite'; 
 
 const RegisterView: React.FC = observer (() => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
-	const {login} = authController;
+	const {register} = registerController;
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		login(username, password).then((success) => {
+		register(username, password).then((success) => {
 			if (success) {
 				navigate('/');
 			}
