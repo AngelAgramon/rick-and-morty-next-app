@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserDto, AuthResponseDto, User } from './dto/auth.dto';
+import { UsersResponseDto } from '../users/dto/user.dto';
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -46,10 +47,19 @@ export class AuthService implements IAuthService {
       username: newUserDto.username,
     };
   }
+
+  async getUsers(): Promise<UsersResponseDto> {
+    const listUsers = this.users.map(u => ({ username: u.username }));
+    return {
+      success: true,
+      users: listUsers,
+    };
+  }
 }
 
 export interface IAuthService {
   //solo lo publico
   validateUser(loginDto: UserDto): Promise<AuthResponseDto>;
   createUser(newUserDto: UserDto): Promise<AuthResponseDto>;
+  getUsers(): Promise<UsersResponseDto>;
 }

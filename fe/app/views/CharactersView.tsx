@@ -1,7 +1,7 @@
 import { useNavigate } from "@remix-run/react";
 import React, { useEffect } from 'react';
 
-import { authController, characterController } from '../controllers';
+import { authController, characterController, userController } from '../controllers';
 import { observer } from "mobx-react-lite"
 import CharacterGrid from '../components/CharacterGrid';
 import Layout from '../components/Layout';
@@ -25,9 +25,19 @@ const CharactersView: React.FC = observer (() => {
 		navigate("/");
 	};
 
+	const openUsersModal = () => {
+		console.log("openUsersModal");
+		userController.setIsUsersModalOpen(true);
+	};
+
+	// const closeUsersModal = () => {
+	// 	userController.setIsUsersModalOpen(false);
+	// };
+
 	return (
 		<Layout>
 			<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '-webkit-fill-available', paddingLeft: '20px', paddingRight: '20px' }}>
+				<button className='btn-primary btn-user' onClick={openUsersModal}>Users</button>
 				<h1 className='page-heading text-gradient teal-cyan rickFont'>Rick and Morty Characters</h1>
 				<button onClick={handleLogout} className='btn-logout '>
 					Logout
