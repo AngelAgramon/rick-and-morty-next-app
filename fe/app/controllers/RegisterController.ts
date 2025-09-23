@@ -16,6 +16,7 @@ class RegisterController {
     return this._registerApi;
   }
   register = async (username: string, password: string): Promise<boolean> => {
+    try {
       const api = this.getRegisterApi();
       const response = await api.simulateRegister(username, password);
       if (response.success) {
