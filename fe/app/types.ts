@@ -64,6 +64,10 @@ interface CharacterGridProps {
   characters: Character[];
 }
 
+interface ModalProps {
+  OpenModal: boolean;
+}
+
 export type {
   Character,
   CharacterApiResponse,
@@ -72,5 +76,6 @@ export type {
   LayoutProps,
   CharacterCardProps,
   CharacterGridProps,
-  User
+  User,
+  ModalProps
 };

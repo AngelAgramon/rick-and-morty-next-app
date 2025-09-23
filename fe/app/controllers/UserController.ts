@@ -1,19 +1,22 @@
 import { makeAutoObservable } from 'mobx';
+import { ModalProps } from '../types';
+
 
 class UserController {
-    isUsersModalOpen: boolean = false;
+    _isUsersModalOpen = false
 
     constructor() {
         makeAutoObservable(this);
     }
 
     getIsUsersModalOpen = () => {
-        return this.isUsersModalOpen;
+        return this._isUsersModalOpen;
     }
 
-    setIsUsersModalOpen = (isUsersModalOpen: boolean) => {
-        console.log("setIsUsersModalOpen", isUsersModalOpen);
-        this.isUsersModalOpen = isUsersModalOpen;
+    setIsUsersModalOpen =() => {
+        console.log(this._isUsersModalOpen);
+        this._isUsersModalOpen = !this._isUsersModalOpen;
+        console.log(this._isUsersModalOpen);
     }
 }
 
