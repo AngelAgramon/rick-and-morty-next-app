@@ -4,5 +4,5 @@ export type UserPublicDto = {
 
 export type UsersResponseDto = {
     success: boolean;
-    users: Array<UserPublicDto>;
+    users: UserPublicDto[];
 }

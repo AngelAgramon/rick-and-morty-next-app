@@ -48,12 +48,14 @@ export class AuthService implements IAuthService {
     };
   }
 
-  async getUsers(): Promise<UsersResponseDto> {
+  getUsers(): Promise<UsersResponseDto> {
     const listUsers = this.users.map(u => ({ username: u.username }));
-    return {
+    const returnValue = {
       success: true,
       users: listUsers,
     };
+
+    return Promise.resolve(returnValue);
   }
 }
 

@@ -68,6 +68,11 @@ interface ModalProps {
   OpenModal: boolean;
 }
 
+interface UserResponse {
+  success: boolean;
+  users: User[];
+}
+
 export type {
   Character,
   CharacterApiResponse,
@@ -77,5 +82,6 @@ export type {
   CharacterCardProps,
   CharacterGridProps,
   User,
-  ModalProps
+  ModalProps,
+  UserResponse,
 };

@@ -103,4 +103,4 @@ const RegisterView: React.FC = observer (() => {
 	);
 });
 
-export default RegisterView;
+export  { RegisterView };

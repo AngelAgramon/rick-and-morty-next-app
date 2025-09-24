@@ -33,7 +33,8 @@ const CharactersView: React.FC = observer (() => {
 	return (
 		<Layout>
 			<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '-webkit-fill-available', paddingLeft: '20px', paddingRight: '20px' }}>
-				<button className='btn-primary btn-user' onClick={openModal}>Users</button>
+				<button className='btn-primary btn-user' onClick={() => navigate("/users")}>Users</button>
+				<button className='btn-primary btn-user' onClick={() => navigate("/characters")}>Characters</button>
 				<h1 className='page-heading text-gradient teal-cyan rickFont'>Rick and Morty Characters</h1>
 				<button onClick={handleLogout} className='btn-logout '>
 					Logout

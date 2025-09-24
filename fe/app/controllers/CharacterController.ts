@@ -33,12 +33,10 @@ class CharacterController {
 
         // Message with more details
         const errorObject: any = error instanceof Error ? error : 'An unknown error occurred';
-        console.log(`${errorObject.message} ${errorObject.code}`);
 
         characterModel.isError = true;
         characterModel.errorMessage = errorMessage;
       } finally {
-        console.log("finally");
         characterModel.isLoading = false;
       }
   };

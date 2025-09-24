@@ -13,7 +13,6 @@ const LoginView: React.FC = observer (() => {
 
 	const handleSubmit = async (e: React.MouseEvent<HTMLSpanElement>) => {
 		e.preventDefault();
-		console.log("handleSubmit");
 		login(username, password).then((success) => {
 			if (success) {
 				navigate('/characters'); 
@@ -23,7 +22,6 @@ const LoginView: React.FC = observer (() => {
 
 	const handleRegisterClick = async (e: React.MouseEvent<HTMLSpanElement>) => {
 		e.preventDefault();
-		console.log("handleRegisterClick");
 		navigate('/register');
 	};
 

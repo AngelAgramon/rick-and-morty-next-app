@@ -3,6 +3,7 @@ import { UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { Get } from "@nestjs/common";
 import type { IAuthService } from '../auth/auth.service';
+import { UsersResponseDto } from './dto/user.dto';
 
 @Controller('users')
 export class UserController {
@@ -12,13 +13,14 @@ export class UserController {
     private readonly authService: IAuthService,
   ) {}
 
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   @Get()
-  async getUsers() {
-    const users = await this.authService.getUsers();
-    if (users.success) {
-      return { success: true, users };
-    }
-    return { success: false, message: 'Error al obtener los usuarios' };
+  async getUsers(): Promise<UsersResponseDto> {
+    // const users = await this.authService.getUsers();
+    // if (users.success) {
+    //   return { success: true, users };
+    // }
+    // return { success: false, message: 'Error al obtener los usuarios' };
+    return await this.authService.getUsers();
   }
 }

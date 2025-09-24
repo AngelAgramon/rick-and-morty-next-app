@@ -19,7 +19,6 @@ class AuthController {
   }
 
   get isAuthenticated() {
-    console.log("isAuthenticated", this._userName, this._token);
     const result = this._userName !== null && this._token !== null;
 
     if (!result) {
@@ -53,7 +52,7 @@ class AuthController {
         return false;
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
       return false;
     }
   };

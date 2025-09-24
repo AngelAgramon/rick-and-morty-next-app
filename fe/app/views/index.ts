@@ -1,3 +1,4 @@
 export * from './LoginView';
 export * from './CharactersView';
-export { default as RegisterView } from './RegisterView';
+export { RegisterView } from './RegisterView';
+export { UserView } from './UserView';
