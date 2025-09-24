@@ -54,7 +54,6 @@ export class AuthService implements IAuthService {
       success: true,
       users: listUsers,
     };
-
     return Promise.resolve(returnValue);
   }
 }

@@ -28,8 +28,7 @@ export class AuthController {
     const user = await this.authService.createUser(registerDto);
     return user;
   }
-
-
+  
   @UseGuards(AuthGuard('jwt'))
   @Post('logout')
   async logout() {
