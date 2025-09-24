@@ -2,7 +2,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { authController } from '../controllers/AuthController';
 
-export class Api {
+export class ApiClient {
 	private readonly API_BASE_URL: string = 'http://localhost:3002'; 
 	private api: AxiosInstance;
 

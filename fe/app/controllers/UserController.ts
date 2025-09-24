@@ -1,25 +1,41 @@
 import { makeAutoObservable } from 'mobx';
-import { ModalProps, UserResponse, User } from '../types';
-import { UserApi } from '~/services';
-import { characterModel } from '~/models';
+import { User } from '../types';
+import { UserApiClient } from '~/services';
+import { userModel } from '~/models';
 
 
 class UserController {
-    _isUsersModalOpen = false
     _users: User[] = [];
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    initialize =  () => {
-        this.fetchUsers();
+    initialize = () => {
+        if (this._users.length === 0 && !userModel.isError && !userModel.isLoading) {
+          this.fetchUsers();
+        }
     }
 
     fetchUsers = async () => {
-        const userApi = new UserApi();
-        const response = await userApi.getUsers();
-        this._users = response.users;
+        try {
+            userModel.isLoading = true;
+            userModel.isError = false;
+
+            const userApi = new UserApiClient();
+            const response = await userApi.getUsers();
+            console.log("response 1 FE fetchUsers: ", response);
+            this._users = response.users;
+            
+        } catch (error) {
+            //TODO: Search for a clean way to handle errors
+            const errorMessage: any = error instanceof Error ? error.message : 'An unknown error occurred';
+
+            userModel.isError = true;
+            userModel.errorMessage = errorMessage;
+        } finally {
+            userModel.isLoading = false;
+        }
     }
 
     get users () {

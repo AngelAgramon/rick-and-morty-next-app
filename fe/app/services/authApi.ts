@@ -1,4 +1,4 @@
-import { Api } from "./api";
+import { ApiClient } from "./api";
 
 interface LoginResponse {
     success: boolean;
@@ -6,7 +6,7 @@ interface LoginResponse {
     token?: string;
 }
 
-export class AuthApi extends Api {
+export class AuthApiClient extends ApiClient {
     public constructor() {
         super();
     }

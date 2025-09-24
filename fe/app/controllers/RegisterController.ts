@@ -1,17 +1,17 @@
 import { makeAutoObservable } from 'mobx';
-import { RegisterApi } from '~/services';
+import { RegisterApiClient } from '~/services';
 
 class RegisterController { 
     userName: string | null = null;
     password: string | null = null;
-    private _registerApi: RegisterApi | null = null;
+    private _registerApi: RegisterApiClient | null = null;
   constructor() {
     makeAutoObservable(this)
   }
     
-  public getRegisterApi(): RegisterApi {
+  public getRegisterApi(): RegisterApiClient {
     if (!this._registerApi) {
-      this._registerApi = new RegisterApi();
+      this._registerApi = new RegisterApiClient();
     }
     return this._registerApi;
   }

@@ -7,13 +7,13 @@ import { userController } from '../controllers';
 export default function UsersPage() {
   const navigate = useNavigate();
 
+  userController.initialize();
+
   useEffect(() => {
     if (!authController.validateRoute()) {
       navigate("/");
       return;
     }
-    userController.initialize();
-    debugger;
   }, [navigate]);
 
   if (!authController.validateRoute()) {

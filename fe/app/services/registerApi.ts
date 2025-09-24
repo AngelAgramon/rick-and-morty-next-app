@@ -1,10 +1,10 @@
-import { Api } from "./api";
+import { ApiClient } from "./api";
 
 interface RegisterResponse {
     success: boolean;
     message?: string;
 }
-export class RegisterApi extends Api {
+export class RegisterApiClient extends ApiClient {
     public constructor() {
         super();
     }

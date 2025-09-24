@@ -1,19 +1,19 @@
-import { CharacterApi } from "../services";
+import { CharacterApiClient } from "../services";
 import { makeAutoObservable } from 'mobx';
 import { Character } from "../types";
 import { characterModel } from "../models";
 
 class CharacterController {
   _characters: Character[] = [];
-  private _characterApi: CharacterApi | null = null;
+  private _characterApi: CharacterApiClient | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  private getCharacterApi(): CharacterApi {
+  private getCharacterApi(): CharacterApiClient {
     if (!this._characterApi) {
-      this._characterApi = new CharacterApi();
+      this._characterApi = new CharacterApiClient();
     }
     return this._characterApi;
   }

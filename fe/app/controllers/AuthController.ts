@@ -1,10 +1,10 @@
-import { AuthApi } from '../services';
+import { AuthApiClient } from '../services';
 import { makeAutoObservable } from 'mobx';
 
 class AuthController {
   _userName: string | null = null;
   _token: string | null = null;
-  private _authApi: AuthApi | null = null;
+  private _authApi: AuthApiClient | null = null;
 
   constructor() {
     makeAutoObservable(this)
@@ -33,9 +33,9 @@ class AuthController {
     return this._token;
   }
 
-  private getAuthApi(): AuthApi {
+  private getAuthApi(): AuthApiClient {
     if (!this._authApi) {
-      this._authApi = new AuthApi();
+      this._authApi = new AuthApiClient();
     }
     return this._authApi;
   }
