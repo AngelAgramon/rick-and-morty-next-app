@@ -6,7 +6,6 @@ const CharacterPage: React.FC = observer(() => {
     return (
         <Layout>
             <h1 className='page-heading text-gradient teal-cyan rickFont'>Character Page</h1>
-            
         </Layout>
     );
 });

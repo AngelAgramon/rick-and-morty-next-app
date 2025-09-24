@@ -1,12 +1,13 @@
 import { useParams } from "@remix-run/react";
-import CharacterPage from "../../views/CharacterPage";
+import {CharacterPage} from "../views";
 import { useNavigate } from "@remix-run/react";
 import { useEffect } from "react";
-import { authController, characterController } from "../../controllers";
+import { authController, characterController } from "../controllers";
 
 export default function CharacterViewPage() {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const params = useParams();
+    const id = params.id;
 
     useEffect(() => {
         if (!authController.validateRoute()) {
@@ -18,4 +19,3 @@ export default function CharacterViewPage() {
 
     return <CharacterPage />;
 }
-
