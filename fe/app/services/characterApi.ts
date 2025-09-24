@@ -11,4 +11,9 @@ export class CharacterApiClient extends ApiClient {
         return response.data.results;
     };
 
+    public getCharacterById = async (id: string) : Promise<Character> => {
+        const response = await this.get<Character>(`/character/${id}`);
+        return response.data;
+    };
+
 }

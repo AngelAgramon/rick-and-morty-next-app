@@ -5,6 +5,7 @@ import { characterModel } from "../models";
 
 class CharacterController {
   _characters: Character[] = [];
+  _character: Character | null = null;
   private _characterApi: CharacterApiClient | null = null;
 
   constructor() {
@@ -33,6 +34,23 @@ class CharacterController {
 
         // Message with more details
         const errorObject: any = error instanceof Error ? error : 'An unknown error occurred';
+
+        characterModel.isError = true;
+        characterModel.errorMessage = errorMessage;
+      } finally {
+        characterModel.isLoading = false;
+      }
+  };
+
+  fetchCharacterById = async (id: string) => {
+      try {
+        characterModel.isLoading = true;
+        characterModel.isError = false;
+
+        const api = this.getCharacterApi();
+        this._character = await api.getCharacterById(id);
+      } catch (error) {
+        const errorMessage: any = error instanceof Error ? error.message : 'An unknown error occurred';
 
         characterModel.isError = true;
         characterModel.errorMessage = errorMessage;

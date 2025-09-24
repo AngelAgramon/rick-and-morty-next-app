@@ -1,5 +1,6 @@
 import React from 'react';
 import { CharacterCardProps } from '../types';
+import { useNavigate } from '@remix-run/react';
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
 	const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -7,6 +8,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
 		target.onerror = null;
 		target.src = `https://placehold.co/200x200/4B5563/FFFFFF?text=${character.name.substring(0, 1)}`;
 	};
+	const navigate = useNavigate();
 
 	return (
 		<div  style={{
@@ -24,7 +26,9 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
 		onMouseLeave={(e) => {
 			e.currentTarget.style.transform = 'translateY(0)';
 			e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)';
-		}}>
+		}}
+		onClick={() => navigate(`/character/${character.id}`)}
+		>
 
 			<div >
 				<img src={character.image} alt={character.name} onError={handleImageError} style={{borderRadius: '12px' }} />
