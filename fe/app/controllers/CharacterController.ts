@@ -69,6 +69,11 @@ class CharacterController {
     this._characters = [];
     this._characterApi = null;
   };
+
+  //Q: los get set no iban en models?
+  get character () {
+      return this._character;
+  }
 }
 
 const characterController = new CharacterController();
